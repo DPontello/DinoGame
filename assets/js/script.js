@@ -14,8 +14,6 @@ document.addEventListener("keydown", (e) => {
         if (gameState === 'PLAYING' && player.grounded) {
             player.dy = -player.jumpForce;
             player.grounded = false;
-        } else {
-            startGame();
         }
     }
 })
@@ -26,9 +24,9 @@ function startGame() {
     score = 0;
     obstacles = [];
     player.y = 200;
-    
+
     document.getElementById('high-score').innerText = 'High: ' + Math.floor(highScore);
-    
+
     animate();
 }
 
@@ -80,7 +78,7 @@ function animate() {
         //Colisão
         if (checkCollision(player, obs)) {
             gameState = 'GAME_OVER';
-            
+
             // Verifica se bateu o recorde e salva no navegador
             if (score > highScore) {
                 highScore = score;
