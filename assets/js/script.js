@@ -40,12 +40,29 @@ const player = {
 };
 
 // --- CONTROLES ---
+function handleJump() {
+    if (gameState === 'PLAYING' && player.grounded) {
+        player.dy = -player.jumpForce;
+        player.grounded = false;
+    }
+}
+
 document.addEventListener("keydown", (e) => {
-    if (e.code === "Space") {
-        if (gameState === 'PLAYING' && player.grounded) {
-            player.dy = -player.jumpForce;
-            player.grounded = false;
-        }
+    if (e.code === "Space" || e.code === "ArrowUp") {
+        handleJump();
+    }
+});
+
+// Suporte para Celular / Mouse
+document.addEventListener("touchstart", (e) => {
+    if (e.target.tagName !== 'BUTTON') {
+        handleJump();
+    }
+}, { passive: true });
+
+document.addEventListener("mousedown", (e) => {
+    if (e.target.tagName !== 'BUTTON') {
+        handleJump();
     }
 });
 
