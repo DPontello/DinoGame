@@ -81,10 +81,9 @@ function startGame() {
 
 // --- LÓGICA DE COLISÃO ---
 function checkCollision(player, obstacle) {
-    // Margem interna para evitar bater nas áreas transparentes das imagens (Hitbox real menor que a imagem)
-    const pPadX = 10; // Reduz a caixa do player
+    const pPadX = 10;
     const pPadY = 10;
-    const oPadX = 15; // Reduz a caixa da torre
+    const oPadX = 15;
     const oPadY = 10;
 
     return player.x + pPadX < obstacle.x + obstacle.w - oPadX &&
@@ -95,10 +94,8 @@ function checkCollision(player, obstacle) {
 
 // --- LOOP PRINCIPAL DO JOGO ---
 function animate() {
-    // Se o jogo acabou ou não começou, não precisa animar o canvas
     if (gameState === 'START' || gameState === 'GAME_OVER') return;
 
-    // Limpa a tela a cada frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (gameState === 'PLAYING') {
@@ -116,7 +113,6 @@ function animate() {
         let podeSpawnar = true;
         if (obstacles.length > 0) {
             let ultimoObstaculo = obstacles[obstacles.length - 1];
-            // Distância mínima relaxada para não bugar geração
             if (canvas.width - ultimoObstaculo.x < 300) {
                 podeSpawnar = false;
             }
@@ -125,7 +121,6 @@ function animate() {
         if (Math.random() < 0.04 && podeSpawnar) {
             let altura = Math.floor(Math.random() * 70) + 40; 
             
-            // Tower 4 tem chance menor (10%), os outros tem 30% cada.
             let randomBuilding;
             const rand = Math.random();
             if (rand < 0.3) randomBuilding = tower1Img;
@@ -133,7 +128,6 @@ function animate() {
             else if (rand < 0.9) randomBuilding = tower3Img;
             else randomBuilding = tower4Img;
             
-            // Mantém a proporção real da imagem
             let aspect = 1;
             if (randomBuilding.width && randomBuilding.height) {
                 aspect = randomBuilding.width / randomBuilding.height;
@@ -143,7 +137,6 @@ function animate() {
             obstacles.push({ x: canvas.width, y: canvas.height - altura, w: larguraReal, h: altura, img: randomBuilding });
         }
 
-        // Velocidade que aumenta em 0.5 a cada 100 pontos
         let currentSpeed = 3 + Math.floor(score / 100) * 0.5;
 
         // --- Move Obstáculos e Checa Colisão ---
@@ -151,13 +144,11 @@ function animate() {
             let obs = obstacles[i];
             obs.x -= currentSpeed; 
 
-            // Verifica Colisão
             if (checkCollision(player, obs)) {
                 gameState = 'EXPLODING'; 
                 break;
             }
 
-            // Remove se sair da tela
             if (obs.x + obs.w < 0) {
                 obstacles.splice(i, 1);
             }
@@ -194,17 +185,14 @@ function animate() {
 
         explosionFrame += 0.25; 
 
-        // Se terminou a animação
         if (currentFrame >= totalFrames) {
             gameState = 'GAME_OVER';
             
-            // Salva recorde final
             if (score > highScore) {
                 highScore = score;
                 localStorage.setItem('dinoHighScore', highScore);
             }
 
-            // Mostra Menu de Game Over
             menu.style.display = 'block';
             menu.innerHTML = '<h1>GAME OVER</h1><p>Score: ' + Math.floor(score) + '</p><p style="color: #FF6B6B; font-weight: bold; margin-bottom: 20px; font-size: 1.3rem;">High Score: ' + Math.floor(highScore) + '</p><button onclick="startGame()">De Novo!</button>';
         }

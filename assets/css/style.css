@@ -1,4 +1,3 @@
-/* RESET BÁSICO */
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +6,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* Fundo animado super bonito com cores vibrantes */
     background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #556270);
     background-size: 300% 300%;
     animation: gradientBG 15s ease infinite;
@@ -32,11 +30,10 @@ body {
     position: relative;
     width: 100%;
     max-width: 800px;
-    aspect-ratio: 2 / 1; /* Mantém a mesma proporção lógica do canvas 800x400 em outras telas */
-    /* Efeito de "vidro" e sombra suave */
+    aspect-ratio: 2 / 1;
     border-radius: 20px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-    overflow: hidden; /* Mantém tudo dentro das bordas arredondadas */
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -48,9 +45,8 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    /* Um fundo de céu levemente gradiente para o jogo em si */
     background: linear-gradient(to bottom, #d4fc79 0%, #96e6a1 100%);
-    border-radius: 20px; /* Herda o arredondamento */
+    border-radius: 20px;
 }
 
 /* CAMADA DE INTERFACE (Placares, Menus) */
@@ -60,7 +56,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Deixa o clique passar para o canvas caso precise depois */
+    pointer-events: none;
 }
 
 /* PLACARES */
@@ -84,11 +80,11 @@ body {
 
 #high-score {
     right: 20px;
-    display: block; /* Agora a lógica de High Score existe */
+    display: block; 
 }
 
 #start-game {
-    display: none; /* Essa div extra do HTML não está sendo usada, escondemos */
+    display: none; 
 }
 
 /* MENU PRINCIPAL & GAME OVER */
@@ -97,8 +93,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    /* Efeito Glassmorphism Premium */
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -107,9 +101,7 @@ body {
     border-radius: 24px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    pointer-events: auto; /* Permite clicar no botão do menu */
-    
-    /* Animação suave para aparecer */
+    pointer-events: auto;
     animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
@@ -135,7 +127,6 @@ body {
     font-weight: 600;
 }
 
-/* BOTÃO DE COMEÇAR GASTÃO */
 #menu button {
     font-family: inherit;
     font-weight: 600;
